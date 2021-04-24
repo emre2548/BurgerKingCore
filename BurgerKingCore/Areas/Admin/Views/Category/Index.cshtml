@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BurgerKingCore.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br />
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            @*partial view tanıtıyoruz*@
+            <partial name="_CreateButtonPartial" />
+        </div>
+        <br />
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr class="table-secondary">
+                        <th>@Html.DisplayNameFor(i => i.Name)</th>
+                        <th>Edit-Details-Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*ikiside DB den adı getirir*@
+                            @*<td>@Html.DisplayNameFor(i => i.Name)</td>*@
+                            <td>@item.Name</td>
+                            <partial name="_TableButtonPartial" model="item.Id" />
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>There is not category</p>
+        }
+    </div>
+</div>
